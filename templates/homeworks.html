@@ -1,0 +1,19 @@
+{% set homeworks = record.homeworks.Homeworks|active_homeworks %}
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">{{ record.name }} - Domácí úkoly ({{ homeworks|count }})</p>
+  </header>
+  <div class="card-content">
+{% for homework in homeworks %}
+  <article class="message{% if homework.DateEnd|from_iso_to_date|fire %} is-danger{% else %} is-warning{% endif %}">
+    <div class="message-header">
+      <strong>{{ homework.Subject.Name }}</strong>
+      <time datetime="{{ homework.DateEnd|from_iso_to_date|to_date_repr }}">{{ homework.DateEnd|from_iso_to_date|to_date_repr }}</time>
+    </div>
+    <div class="message-body">
+      {{ homework.Content|safe }}
+    </div>
+  </article>
+{% endfor %}
+  </div>
+</div>

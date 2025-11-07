@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+{% block head %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <title>Bakalari Summary | {% block title %}{% endblock %}</title>
+{% endblock %}
+  </head>
+<body>
+  <main>{% block main %}{% endblock %}</main>
+  <footer class="footer">
+{% block footer %}
+    <div class="content has-text-centered">Generated in {{ now }}</div>
+{% endblock %}
+    </footer>
+</body>
+</html>

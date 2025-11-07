@@ -1,0 +1,14 @@
+[
+	{
+		"name": "Student 1",
+		"base_url": "https://some-bakalari-api-root/",
+		"username": "abcd",
+		"password": "1234"
+	},
+	{
+		"name": "Student 2",
+		"base_url": "https://some-bakalari-api-root/",
+		"username": "efgh",
+		"password": "5678"
+	}
+]

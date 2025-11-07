@@ -1,0 +1,19 @@
+{% set komens = record.komens.Messages|unread_komens %}
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">{{ record.name }} - Komens ({{ komens|count }})</p>
+  </header>
+  <div class="card-content">
+{% for message in komens %}
+  <article class="message">
+    <div class="message-header">
+      <strong>{{ message.RelevantName }} | {{ message.Title }}</strong>
+      <time datetime="{{ message.SentDate|from_iso_to_date|to_date_repr }}">{{ message.SentDate|from_iso_to_date|to_date_repr }}</time>
+    </div>
+    <div class="message-body">
+      {{ message.Text|safe }}
+    </div>
+  </article>
+{% endfor %}
+  </div>
+</div>
