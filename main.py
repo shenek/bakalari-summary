@@ -1,6 +1,7 @@
 import sys
 import json
 import requests
+import locale
 from datetime import datetime, timedelta
 from dateutil import parser
 
@@ -70,9 +71,11 @@ def main():
         ]
     }
 
+    locale.setlocale(locale.LC_ALL, 'cs_CZ.utf8')
+
     # render jinja template
     env = Environment(loader = FileSystemLoader('templates'))
-    env.filters["to_date_repr"] = lambda value: value.strftime("%Y-%m-%d")
+    env.filters["to_date_repr"] = lambda value: value.strftime("%a %Y-%m-%d")
     env.filters["from_iso_to_date"] = lambda value: parser.parse(value)
     env.filters["fire"] = lambda value: value.date() <= (datetime.now() + timedelta(days=1)).date()
     env.filters["active_homeworks"] = lambda homeworks: [e for e in homeworks if not e["Closed"] and not e["Finished"]]
