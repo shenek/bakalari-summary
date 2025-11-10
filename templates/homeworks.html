@@ -4,7 +4,7 @@
     <p class="card-header-title">{{ record.name }} - Domácí úkoly ({{ homeworks|count }})</p>
   </header>
   <div class="card-content">
-{% for homework in homeworks %}
+{% for homework in homeworks|sort(attribute="DateEnd") %}
   <article class="message{% if homework.DateEnd|from_iso_to_date|fire %} is-danger{% else %} is-warning{% endif %}">
     <div class="message-header">
       <strong>{{ homework.Subject.Name }}</strong>

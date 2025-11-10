@@ -4,7 +4,7 @@
     <p class="card-header-title">{{ record.name }} - Komens ({{ komens|count }})</p>
   </header>
   <div class="card-content">
-{% for message in komens %}
+{% for message in komens|sort(attribute="SentDate") %}
   <article class="message">
     <div class="message-header">
       <strong>{{ message.RelevantName }} | {{ message.Title }}</strong>
