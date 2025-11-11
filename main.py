@@ -7,6 +7,18 @@ from dateutil import parser
 
 from jinja2 import Environment, FileSystemLoader
 
+def homework_color(homework: dict):
+    if end_date_str := homework.get("DateEnd"):
+        if end_date := parser.parse(end_date_str):
+            if end_date.date() <= datetime.now().date():
+                return "is-dark"
+            elif end_date.date() <= (datetime.now() + timedelta(days=1)).date():
+                return "is-danger"
+            else:
+                return "is-warning"
+    return "is-dark"
+
+
 def download_data(name: str, base_url: str, username: str, password: str) -> dict:
     s = requests.Session()
     # Login
@@ -77,7 +89,7 @@ def main():
     env = Environment(loader = FileSystemLoader('templates'))
     env.filters["to_date_repr"] = lambda value: value.strftime("%a %Y-%m-%d")
     env.filters["from_iso_to_date"] = lambda value: parser.parse(value)
-    env.filters["fire"] = lambda value: value.date() <= (datetime.now() + timedelta(days=1)).date()
+    env.filters["homework_color"] = homework_color
     env.filters["active_homeworks"] = lambda homeworks: [e for e in homeworks if not e["Closed"] and not e["Finished"]]
     env.filters["unread_komens"] = lambda komens: [e for e in komens if not e["Read"]]
     template = env.get_template("summary.html")
